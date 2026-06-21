@@ -1,0 +1,31 @@
+{
+  "state": {
+    "filters": {
+      "scope": "route",
+      "default": {
+        "status": "open"
+      }
+    },
+    "dashboard": {
+      "scope": "route",
+      "data": {
+        "resource": "stats.summary",
+        "params": {
+          "orgId": {
+            "from": "session.orgId"
+          }
+        }
+      }
+    }
+  },
+  "refs": {
+    "current-org": {
+      "from": "session.orgId",
+      "transform": "string"
+    },
+    "total-users": {
+      "from": "stats.total",
+      "transform": "number"
+    }
+  }
+}

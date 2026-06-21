@@ -1,0 +1,43 @@
+{
+  "policies": {
+    "can-enter-dashboard": {
+      "all": [
+        "is-authenticated",
+        {
+          "truthy": {
+            "from": "global.user.orgId"
+          }
+        }
+      ]
+    }
+  },
+  "i18n": {
+    "default": "en",
+    "locales": ["en", "es"],
+    "strings": {
+      "en": {
+        "auth": {
+          "title": "Welcome back"
+        }
+      },
+      "es": {
+        "auth": {
+          "title": "Bienvenido"
+        }
+      }
+    },
+    "detect": ["state", "navigator"]
+  },
+  "state": {
+    "session.user": {
+      "scope": "app",
+      "default": null,
+      "persist": "sessionStorage"
+    },
+    "session.locale": {
+      "scope": "app",
+      "default": "en",
+      "persist": "localStorage"
+    }
+  }
+}

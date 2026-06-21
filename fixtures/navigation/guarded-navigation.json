@@ -1,0 +1,13 @@
+{
+  "actions": {
+    "go-to-detail": {
+      "type": "navigate",
+      "to": "/orgs/{orgId}/users/{userId}"
+    },
+    "open-docs": {
+      "type": "navigate-external",
+      "to": "https://example.com/docs",
+      "target": "_blank"
+    }
+  }
+}

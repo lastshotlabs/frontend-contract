@@ -1,0 +1,27 @@
+{
+  "actions": {
+    "open-composer": {
+      "type": "open-modal",
+      "modal": "composer",
+      "resultTarget": "draft.result"
+    },
+    "close-composer": {
+      "type": "close-modal",
+      "modal": "composer",
+      "result": {
+        "from": "draft.id"
+      }
+    },
+    "confirm-delete": {
+      "type": "confirm",
+      "title": "Delete item",
+      "message": "This cannot be undone",
+      "variant": "destructive",
+      "onConfirm": {
+        "type": "toast",
+        "message": "Deleted",
+        "variant": "success"
+      }
+    }
+  }
+}
