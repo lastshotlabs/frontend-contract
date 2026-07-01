@@ -36,16 +36,16 @@ var i18nDetectStrategySchema = import_zod.z.enum([
   "header"
 ]);
 var i18nInlineStringsSchema = import_zod.z.lazy(
-  () => import_zod.z.record(import_zod.z.union([import_zod.z.string(), i18nInlineStringsSchema]))
+  () => import_zod.z.record(import_zod.z.string(), import_zod.z.union([import_zod.z.string(), i18nInlineStringsSchema]))
 );
 var tRefSchema = import_zod.z.object({
   t: import_zod.z.string().min(1),
-  vars: import_zod.z.record(import_zod.z.unknown()).optional()
+  vars: import_zod.z.record(import_zod.z.string(), import_zod.z.unknown()).optional()
 }).strict();
 var i18nConfigSchema = import_zod.z.object({
   default: import_zod.z.string().min(1),
   locales: import_zod.z.array(import_zod.z.string().min(1)).min(1),
-  strings: import_zod.z.record(import_zod.z.union([import_zod.z.string(), i18nInlineStringsSchema])),
+  strings: import_zod.z.record(import_zod.z.string(), import_zod.z.union([import_zod.z.string(), i18nInlineStringsSchema])),
   detect: import_zod.z.array(i18nDetectStrategySchema).optional()
 }).strict();
 function isTRef(value) {

@@ -319,7 +319,7 @@ var resourceParamSchema = import_zod3.z.lazy(
 );
 var resourceRefSchema = import_zod3.z.object({
   resource: import_zod3.z.string().min(1),
-  params: import_zod3.z.record(resourceParamSchema).optional()
+  params: import_zod3.z.record(import_zod3.z.string(), resourceParamSchema).optional()
 }).strict();
 var resourceInvalidationTargetSchema = import_zod3.z.union([
   import_zod3.z.string().min(1),
@@ -331,7 +331,7 @@ var optimisticTargetSchema = import_zod3.z.union([
   import_zod3.z.string().min(1),
   import_zod3.z.object({
     resource: import_zod3.z.string().min(1),
-    params: import_zod3.z.record(import_zod3.z.unknown()).optional()
+    params: import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()).optional()
   }).strict()
 ]);
 var optimisticConfigSchema = import_zod3.z.object({
@@ -357,7 +357,7 @@ var resourceConfigSchema = import_zod3.z.object({
   method: httpMethodSchema.optional(),
   endpoint: import_zod3.z.string().min(1),
   client: import_zod3.z.string().min(1).optional(),
-  params: import_zod3.z.record(import_zod3.z.unknown()).optional(),
+  params: import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()).optional(),
   cacheMs: import_zod3.z.number().int().min(0).optional(),
   pollMs: import_zod3.z.number().int().positive().optional(),
   refetchOnMount: import_zod3.z.boolean().optional(),
@@ -656,7 +656,7 @@ var flavorOverrideSchema = import_zod4.z.object({
 }).strict();
 var themeConfigSchema = import_zod4.z.object({
   flavor: import_zod4.z.string().optional(),
-  flavors: import_zod4.z.record(flavorOverrideSchema).optional(),
+  flavors: import_zod4.z.record(import_zod4.z.string(), flavorOverrideSchema).optional(),
   overrides: import_zod4.z.object({
     colors: themeColorsSchema.optional(),
     darkColors: themeColorsSchema.optional(),
@@ -800,7 +800,7 @@ var scrollToActionSchema = import_zod5.z.object({
 var runWorkflowActionSchema = import_zod5.z.object({
   type: import_zod5.z.literal("run-workflow"),
   workflow: import_zod5.z.string().min(1),
-  input: import_zod5.z.record(import_zod5.z.unknown()).optional()
+  input: import_zod5.z.record(import_zod5.z.string(), import_zod5.z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var branchActionSchema = import_zod5.z.lazy(
   () => import_zod5.z.object({
@@ -821,15 +821,15 @@ var forEachActionSchema = import_zod5.z.lazy(
 var wsSendActionSchema = import_zod5.z.object({
   type: import_zod5.z.literal("ws-send"),
   event: import_zod5.z.string().min(1),
-  data: import_zod5.z.union([import_zod5.z.record(import_zod5.z.unknown()), fromRefSchema2]).optional()
+  data: import_zod5.z.union([import_zod5.z.record(import_zod5.z.string(), import_zod5.z.unknown()), fromRefSchema2]).optional()
 }).extend(actionTimingFields).strict();
 function buildApiActionSchema() {
   return import_zod5.z.object({
     type: import_zod5.z.literal("api"),
     method: import_zod5.z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"]),
     endpoint: endpointTargetSchema,
-    body: import_zod5.z.union([import_zod5.z.record(import_zod5.z.unknown()), fromRefSchema2]).optional(),
-    params: import_zod5.z.record(import_zod5.z.unknown()).optional(),
+    body: import_zod5.z.union([import_zod5.z.record(import_zod5.z.string(), import_zod5.z.unknown()), fromRefSchema2]).optional(),
+    params: import_zod5.z.record(import_zod5.z.string(), import_zod5.z.unknown()).optional(),
     invalidates: import_zod5.z.array(import_zod5.z.string().min(1)).optional(),
     onSuccess: import_zod5.z.union([import_zod5.z.lazy(() => actionSchema), import_zod5.z.array(import_zod5.z.lazy(() => actionSchema))]).optional(),
     onError: import_zod5.z.union([import_zod5.z.lazy(() => actionSchema), import_zod5.z.array(import_zod5.z.lazy(() => actionSchema))]).optional()
@@ -855,13 +855,13 @@ function buildToastActionSchema() {
 var trackActionSchema = import_zod5.z.object({
   type: import_zod5.z.literal("track"),
   event: import_zod5.z.string().min(1),
-  props: import_zod5.z.record(import_zod5.z.unknown()).optional()
+  props: import_zod5.z.record(import_zod5.z.string(), import_zod5.z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var logActionSchema = import_zod5.z.object({
   type: import_zod5.z.literal("log"),
   level: import_zod5.z.enum(["info", "warn", "error", "debug"]),
   message: import_zod5.z.string(),
-  data: import_zod5.z.record(import_zod5.z.unknown()).optional()
+  data: import_zod5.z.record(import_zod5.z.string(), import_zod5.z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var apiActionSchema = buildApiActionSchema();
 var toastActionSchema = buildToastActionSchema();
@@ -902,16 +902,16 @@ var i18nDetectStrategySchema = import_zod6.z.enum([
   "header"
 ]);
 var i18nInlineStringsSchema = import_zod6.z.lazy(
-  () => import_zod6.z.record(import_zod6.z.union([import_zod6.z.string(), i18nInlineStringsSchema]))
+  () => import_zod6.z.record(import_zod6.z.string(), import_zod6.z.union([import_zod6.z.string(), i18nInlineStringsSchema]))
 );
 var tRefSchema = import_zod6.z.object({
   t: import_zod6.z.string().min(1),
-  vars: import_zod6.z.record(import_zod6.z.unknown()).optional()
+  vars: import_zod6.z.record(import_zod6.z.string(), import_zod6.z.unknown()).optional()
 }).strict();
 var i18nConfigSchema = import_zod6.z.object({
   default: import_zod6.z.string().min(1),
   locales: import_zod6.z.array(import_zod6.z.string().min(1)).min(1),
-  strings: import_zod6.z.record(import_zod6.z.union([import_zod6.z.string(), i18nInlineStringsSchema])),
+  strings: import_zod6.z.record(import_zod6.z.string(), import_zod6.z.union([import_zod6.z.string(), i18nInlineStringsSchema])),
   detect: import_zod6.z.array(i18nDetectStrategySchema).optional()
 }).strict();
 function isTRef(value) {
@@ -973,7 +973,7 @@ var stateValueConfigSchema = import_zod7.z.object({
     });
   }
 });
-var stateConfigMapSchema = import_zod7.z.record(stateValueConfigSchema);
+var stateConfigMapSchema = import_zod7.z.record(import_zod7.z.string(), stateValueConfigSchema);
 
 // src/workflows/schema.ts
 var import_zod8 = require("zod");
@@ -1019,7 +1019,7 @@ var workflowNodeSchema = import_zod8.z.lazy(
       type: import_zod8.z.literal("assign"),
       id: import_zod8.z.string().optional(),
       when: workflowConditionSchema.optional(),
-      values: import_zod8.z.record(import_zod8.z.unknown())
+      values: import_zod8.z.record(import_zod8.z.string(), import_zod8.z.unknown())
     }).strict(),
     import_zod8.z.object({
       type: import_zod8.z.literal("try"),
@@ -1045,7 +1045,7 @@ var workflowDefinitionSchema = import_zod8.z.union([
 
 // src/components/schema.ts
 var import_zod9 = require("zod");
-var componentTokenOverridesSchema = import_zod9.z.record(import_zod9.z.string());
+var componentTokenOverridesSchema = import_zod9.z.record(import_zod9.z.string(), import_zod9.z.string());
 var componentZIndexSchema = import_zod9.z.union([
   import_zod9.z.enum([
     "base",
@@ -1320,7 +1320,7 @@ var SURFACE_STATE_NAMES = [
 var surfaceStateNameSchema = import_zod9.z.enum(SURFACE_STATE_NAMES);
 var slotStateNameSchema = surfaceStateNameSchema;
 var statefulElementSchema = styleableElementSchema.extend({
-  states: import_zod9.z.record(surfaceStateNameSchema, styleableElementSchema.partial()).optional()
+  states: import_zod9.z.partialRecord(surfaceStateNameSchema, styleableElementSchema.partial()).optional()
 });
 function slotsSchema(slotNames) {
   return import_zod9.z.object(

@@ -80,7 +80,7 @@ var resourceParamSchema = import_zod2.z.lazy(
 );
 var resourceRefSchema = import_zod2.z.object({
   resource: import_zod2.z.string().min(1),
-  params: import_zod2.z.record(resourceParamSchema).optional()
+  params: import_zod2.z.record(import_zod2.z.string(), resourceParamSchema).optional()
 }).strict();
 var resourceInvalidationTargetSchema = import_zod2.z.union([
   import_zod2.z.string().min(1),
@@ -92,7 +92,7 @@ var optimisticTargetSchema = import_zod2.z.union([
   import_zod2.z.string().min(1),
   import_zod2.z.object({
     resource: import_zod2.z.string().min(1),
-    params: import_zod2.z.record(import_zod2.z.unknown()).optional()
+    params: import_zod2.z.record(import_zod2.z.string(), import_zod2.z.unknown()).optional()
   }).strict()
 ]);
 var optimisticConfigSchema = import_zod2.z.object({
@@ -118,7 +118,7 @@ var resourceConfigSchema = import_zod2.z.object({
   method: httpMethodSchema.optional(),
   endpoint: import_zod2.z.string().min(1),
   client: import_zod2.z.string().min(1).optional(),
-  params: import_zod2.z.record(import_zod2.z.unknown()).optional(),
+  params: import_zod2.z.record(import_zod2.z.string(), import_zod2.z.unknown()).optional(),
   cacheMs: import_zod2.z.number().int().min(0).optional(),
   pollMs: import_zod2.z.number().int().positive().optional(),
   refetchOnMount: import_zod2.z.boolean().optional(),
@@ -227,7 +227,7 @@ var scrollToActionSchema = import_zod3.z.object({
 var runWorkflowActionSchema = import_zod3.z.object({
   type: import_zod3.z.literal("run-workflow"),
   workflow: import_zod3.z.string().min(1),
-  input: import_zod3.z.record(import_zod3.z.unknown()).optional()
+  input: import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var branchActionSchema = import_zod3.z.lazy(
   () => import_zod3.z.object({
@@ -248,15 +248,15 @@ var forEachActionSchema = import_zod3.z.lazy(
 var wsSendActionSchema = import_zod3.z.object({
   type: import_zod3.z.literal("ws-send"),
   event: import_zod3.z.string().min(1),
-  data: import_zod3.z.union([import_zod3.z.record(import_zod3.z.unknown()), fromRefSchema2]).optional()
+  data: import_zod3.z.union([import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()), fromRefSchema2]).optional()
 }).extend(actionTimingFields).strict();
 function buildApiActionSchema() {
   return import_zod3.z.object({
     type: import_zod3.z.literal("api"),
     method: import_zod3.z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"]),
     endpoint: endpointTargetSchema,
-    body: import_zod3.z.union([import_zod3.z.record(import_zod3.z.unknown()), fromRefSchema2]).optional(),
-    params: import_zod3.z.record(import_zod3.z.unknown()).optional(),
+    body: import_zod3.z.union([import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()), fromRefSchema2]).optional(),
+    params: import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()).optional(),
     invalidates: import_zod3.z.array(import_zod3.z.string().min(1)).optional(),
     onSuccess: import_zod3.z.union([import_zod3.z.lazy(() => actionSchema), import_zod3.z.array(import_zod3.z.lazy(() => actionSchema))]).optional(),
     onError: import_zod3.z.union([import_zod3.z.lazy(() => actionSchema), import_zod3.z.array(import_zod3.z.lazy(() => actionSchema))]).optional()
@@ -282,13 +282,13 @@ function buildToastActionSchema() {
 var trackActionSchema = import_zod3.z.object({
   type: import_zod3.z.literal("track"),
   event: import_zod3.z.string().min(1),
-  props: import_zod3.z.record(import_zod3.z.unknown()).optional()
+  props: import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var logActionSchema = import_zod3.z.object({
   type: import_zod3.z.literal("log"),
   level: import_zod3.z.enum(["info", "warn", "error", "debug"]),
   message: import_zod3.z.string(),
-  data: import_zod3.z.record(import_zod3.z.unknown()).optional()
+  data: import_zod3.z.record(import_zod3.z.string(), import_zod3.z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var apiActionSchema = buildApiActionSchema();
 var toastActionSchema = buildToastActionSchema();
@@ -363,7 +363,7 @@ var workflowNodeSchema = import_zod4.z.lazy(
       type: import_zod4.z.literal("assign"),
       id: import_zod4.z.string().optional(),
       when: workflowConditionSchema.optional(),
-      values: import_zod4.z.record(import_zod4.z.unknown())
+      values: import_zod4.z.record(import_zod4.z.string(), import_zod4.z.unknown())
     }).strict(),
     import_zod4.z.object({
       type: import_zod4.z.literal("try"),

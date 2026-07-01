@@ -1,6 +1,6 @@
 import {
   actionSchema
-} from "./chunk-XA6BHBV7.js";
+} from "./chunk-OEXWAGF6.js";
 
 // src/workflows/schema.ts
 import { z } from "zod";
@@ -46,7 +46,7 @@ var workflowNodeSchema = z.lazy(
       type: z.literal("assign"),
       id: z.string().optional(),
       when: workflowConditionSchema.optional(),
-      values: z.record(z.unknown())
+      values: z.record(z.string(), z.unknown())
     }).strict(),
     z.object({
       type: z.literal("try"),
@@ -75,4 +75,4 @@ export {
   workflowNodeSchema,
   workflowDefinitionSchema
 };
-//# sourceMappingURL=chunk-KLTVTIED.js.map
+//# sourceMappingURL=chunk-2MVMQLT6.js.map

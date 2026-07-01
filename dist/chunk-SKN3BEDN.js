@@ -149,7 +149,7 @@ var flavorOverrideSchema = z.object({
 }).strict();
 var themeConfigSchema = z.object({
   flavor: z.string().optional(),
-  flavors: z.record(flavorOverrideSchema).optional(),
+  flavors: z.record(z.string(), flavorOverrideSchema).optional(),
   overrides: z.object({
     colors: themeColorsSchema.optional(),
     darkColors: themeColorsSchema.optional(),
@@ -181,4 +181,4 @@ export {
   flavorOverrideSchema,
   themeConfigSchema
 };
-//# sourceMappingURL=chunk-GCI55URR.js.map
+//# sourceMappingURL=chunk-SKN3BEDN.js.map

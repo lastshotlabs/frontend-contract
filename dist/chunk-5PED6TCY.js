@@ -7,16 +7,16 @@ var i18nDetectStrategySchema = z.enum([
   "header"
 ]);
 var i18nInlineStringsSchema = z.lazy(
-  () => z.record(z.union([z.string(), i18nInlineStringsSchema]))
+  () => z.record(z.string(), z.union([z.string(), i18nInlineStringsSchema]))
 );
 var tRefSchema = z.object({
   t: z.string().min(1),
-  vars: z.record(z.unknown()).optional()
+  vars: z.record(z.string(), z.unknown()).optional()
 }).strict();
 var i18nConfigSchema = z.object({
   default: z.string().min(1),
   locales: z.array(z.string().min(1)).min(1),
-  strings: z.record(z.union([z.string(), i18nInlineStringsSchema])),
+  strings: z.record(z.string(), z.union([z.string(), i18nInlineStringsSchema])),
   detect: z.array(i18nDetectStrategySchema).optional()
 }).strict();
 function isTRef(value) {
@@ -29,4 +29,4 @@ export {
   i18nConfigSchema,
   isTRef
 };
-//# sourceMappingURL=chunk-XRMUDBVG.js.map
+//# sourceMappingURL=chunk-5PED6TCY.js.map

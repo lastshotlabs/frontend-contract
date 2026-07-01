@@ -183,7 +183,7 @@ var flavorOverrideSchema = import_zod.z.object({
 }).strict();
 var themeConfigSchema = import_zod.z.object({
   flavor: import_zod.z.string().optional(),
-  flavors: import_zod.z.record(flavorOverrideSchema).optional(),
+  flavors: import_zod.z.record(import_zod.z.string(), flavorOverrideSchema).optional(),
   overrides: import_zod.z.object({
     colors: themeColorsSchema.optional(),
     darkColors: themeColorsSchema.optional(),

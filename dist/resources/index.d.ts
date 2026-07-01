@@ -1,111 +1,77 @@
 import { z } from 'zod';
 import { a as FromRef } from '../from-B_VrpLQ5.js';
 
-declare const httpMethodSchema: z.ZodEnum<["GET", "POST", "PUT", "PATCH", "DELETE"]>;
+declare const httpMethodSchema: z.ZodEnum<{
+    GET: "GET";
+    POST: "POST";
+    PUT: "PUT";
+    PATCH: "PATCH";
+    DELETE: "DELETE";
+}>;
 declare const resourceParamSchema: z.ZodType<unknown | FromRef>;
 declare const resourceRefSchema: z.ZodObject<{
     resource: z.ZodString;
-    params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodType<unknown, z.ZodTypeDef, unknown>>>;
-}, "strict", z.ZodTypeAny, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}>;
-declare const resourceInvalidationTargetSchema: z.ZodUnion<[z.ZodString, z.ZodObject<{
-    key: z.ZodArray<z.ZodString, "many">;
-}, "strict", z.ZodTypeAny, {
-    key: string[];
-}, {
-    key: string[];
-}>]>;
-declare const optimisticTargetSchema: z.ZodUnion<[z.ZodString, z.ZodObject<{
+    params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodType<unknown, unknown, z.core.$ZodTypeInternals<unknown, unknown>>>>;
+}, z.core.$strict>;
+declare const resourceInvalidationTargetSchema: z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
+    key: z.ZodArray<z.ZodString>;
+}, z.core.$strict>]>;
+declare const optimisticTargetSchema: z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
     resource: z.ZodString;
     params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-}, "strict", z.ZodTypeAny, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}>]>;
-declare const optimisticConfigSchema: z.ZodEffects<z.ZodObject<{
-    target: z.ZodUnion<[z.ZodString, z.ZodObject<{
+}, z.core.$strict>]>;
+declare const optimisticConfigSchema: z.ZodObject<{
+    target: z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
         resource: z.ZodString;
         params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-    }, "strict", z.ZodTypeAny, {
-        resource: string;
-        params?: Record<string, unknown> | undefined;
-    }, {
-        resource: string;
-        params?: Record<string, unknown> | undefined;
-    }>]>;
-    merge: z.ZodEnum<["append", "prepend", "replace", "patch", "remove"]>;
+    }, z.core.$strict>]>;
+    merge: z.ZodEnum<{
+        replace: "replace";
+        append: "append";
+        prepend: "prepend";
+        patch: "patch";
+        remove: "remove";
+    }>;
     idField: z.ZodOptional<z.ZodString>;
-}, "strict", z.ZodTypeAny, {
-    target: string | {
-        resource: string;
-        params?: Record<string, unknown> | undefined;
-    };
-    merge: "append" | "prepend" | "replace" | "patch" | "remove";
-    idField?: string | undefined;
-}, {
-    target: string | {
-        resource: string;
-        params?: Record<string, unknown> | undefined;
-    };
-    merge: "append" | "prepend" | "replace" | "patch" | "remove";
-    idField?: string | undefined;
-}>, {
-    target: string | {
-        resource: string;
-        params?: Record<string, unknown> | undefined;
-    };
-    merge: "append" | "prepend" | "replace" | "patch" | "remove";
-    idField?: string | undefined;
-}, {
-    target: string | {
-        resource: string;
-        params?: Record<string, unknown> | undefined;
-    };
-    merge: "append" | "prepend" | "replace" | "patch" | "remove";
-    idField?: string | undefined;
-}>;
-declare const endpointTargetSchema: z.ZodUnion<[z.ZodString, z.ZodObject<{
+}, z.core.$strict>;
+declare const endpointTargetSchema: z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
     resource: z.ZodString;
-    params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodType<unknown, z.ZodTypeDef, unknown>>>;
-}, "strict", z.ZodTypeAny, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}>]>;
-declare const dataSourceSchema: z.ZodUnion<[z.ZodString, z.ZodObject<{
+    params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodType<unknown, unknown, z.core.$ZodTypeInternals<unknown, unknown>>>>;
+}, z.core.$strict>]>;
+declare const dataSourceSchema: z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
     from: z.ZodString;
-    transform: z.ZodOptional<z.ZodEnum<["uppercase", "lowercase", "trim", "length", "number", "boolean", "string", "json", "keys", "values", "first", "last", "count", "sum", "join", "split", "default"]>>;
-    transformArg: z.ZodOptional<z.ZodUnion<[z.ZodString, z.ZodNumber]>>;
-}, "strict", z.ZodTypeAny, {
-    from: string;
-    transform?: "string" | "number" | "boolean" | "uppercase" | "lowercase" | "trim" | "length" | "json" | "keys" | "values" | "first" | "last" | "count" | "sum" | "join" | "split" | "default" | undefined;
-    transformArg?: string | number | undefined;
-}, {
-    from: string;
-    transform?: "string" | "number" | "boolean" | "uppercase" | "lowercase" | "trim" | "length" | "json" | "keys" | "values" | "first" | "last" | "count" | "sum" | "join" | "split" | "default" | undefined;
-    transformArg?: string | number | undefined;
-}>, z.ZodObject<{
+    transform: z.ZodOptional<z.ZodEnum<{
+        string: "string";
+        number: "number";
+        boolean: "boolean";
+        uppercase: "uppercase";
+        lowercase: "lowercase";
+        trim: "trim";
+        length: "length";
+        json: "json";
+        keys: "keys";
+        values: "values";
+        first: "first";
+        last: "last";
+        count: "count";
+        sum: "sum";
+        join: "join";
+        split: "split";
+        default: "default";
+    }>>;
+    transformArg: z.ZodOptional<z.ZodUnion<readonly [z.ZodString, z.ZodNumber]>>;
+}, z.core.$strict>, z.ZodObject<{
     resource: z.ZodString;
-    params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodType<unknown, z.ZodTypeDef, unknown>>>;
-}, "strict", z.ZodTypeAny, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}, {
-    resource: string;
-    params?: Record<string, unknown> | undefined;
-}>]>;
+    params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodType<unknown, unknown, z.core.$ZodTypeInternals<unknown, unknown>>>>;
+}, z.core.$strict>]>;
 declare const resourceConfigSchema: z.ZodObject<{
-    method: z.ZodOptional<z.ZodEnum<["GET", "POST", "PUT", "PATCH", "DELETE"]>>;
+    method: z.ZodOptional<z.ZodEnum<{
+        GET: "GET";
+        POST: "POST";
+        PUT: "PUT";
+        PATCH: "PATCH";
+        DELETE: "DELETE";
+    }>>;
     endpoint: z.ZodString;
     client: z.ZodOptional<z.ZodString>;
     params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
@@ -115,103 +81,25 @@ declare const resourceConfigSchema: z.ZodObject<{
     refetchOnWindowFocus: z.ZodOptional<z.ZodBoolean>;
     retry: z.ZodOptional<z.ZodNumber>;
     retryDelayMs: z.ZodOptional<z.ZodNumber>;
-    dependsOn: z.ZodOptional<z.ZodArray<z.ZodString, "many">>;
-    invalidates: z.ZodOptional<z.ZodArray<z.ZodUnion<[z.ZodString, z.ZodObject<{
-        key: z.ZodArray<z.ZodString, "many">;
-    }, "strict", z.ZodTypeAny, {
-        key: string[];
-    }, {
-        key: string[];
-    }>]>, "many">>;
-    optimistic: z.ZodOptional<z.ZodEffects<z.ZodObject<{
-        target: z.ZodUnion<[z.ZodString, z.ZodObject<{
+    dependsOn: z.ZodOptional<z.ZodArray<z.ZodString>>;
+    invalidates: z.ZodOptional<z.ZodArray<z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
+        key: z.ZodArray<z.ZodString>;
+    }, z.core.$strict>]>>>;
+    optimistic: z.ZodOptional<z.ZodObject<{
+        target: z.ZodUnion<readonly [z.ZodString, z.ZodObject<{
             resource: z.ZodString;
             params: z.ZodOptional<z.ZodRecord<z.ZodString, z.ZodUnknown>>;
-        }, "strict", z.ZodTypeAny, {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        }, {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        }>]>;
-        merge: z.ZodEnum<["append", "prepend", "replace", "patch", "remove"]>;
+        }, z.core.$strict>]>;
+        merge: z.ZodEnum<{
+            replace: "replace";
+            append: "append";
+            prepend: "prepend";
+            patch: "patch";
+            remove: "remove";
+        }>;
         idField: z.ZodOptional<z.ZodString>;
-    }, "strict", z.ZodTypeAny, {
-        target: string | {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        };
-        merge: "append" | "prepend" | "replace" | "patch" | "remove";
-        idField?: string | undefined;
-    }, {
-        target: string | {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        };
-        merge: "append" | "prepend" | "replace" | "patch" | "remove";
-        idField?: string | undefined;
-    }>, {
-        target: string | {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        };
-        merge: "append" | "prepend" | "replace" | "patch" | "remove";
-        idField?: string | undefined;
-    }, {
-        target: string | {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        };
-        merge: "append" | "prepend" | "replace" | "patch" | "remove";
-        idField?: string | undefined;
-    }>>;
-}, "strict", z.ZodTypeAny, {
-    endpoint: string;
-    params?: Record<string, unknown> | undefined;
-    method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | undefined;
-    client?: string | undefined;
-    cacheMs?: number | undefined;
-    pollMs?: number | undefined;
-    refetchOnMount?: boolean | undefined;
-    refetchOnWindowFocus?: boolean | undefined;
-    retry?: number | undefined;
-    retryDelayMs?: number | undefined;
-    dependsOn?: string[] | undefined;
-    invalidates?: (string | {
-        key: string[];
-    })[] | undefined;
-    optimistic?: {
-        target: string | {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        };
-        merge: "append" | "prepend" | "replace" | "patch" | "remove";
-        idField?: string | undefined;
-    } | undefined;
-}, {
-    endpoint: string;
-    params?: Record<string, unknown> | undefined;
-    method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | undefined;
-    client?: string | undefined;
-    cacheMs?: number | undefined;
-    pollMs?: number | undefined;
-    refetchOnMount?: boolean | undefined;
-    refetchOnWindowFocus?: boolean | undefined;
-    retry?: number | undefined;
-    retryDelayMs?: number | undefined;
-    dependsOn?: string[] | undefined;
-    invalidates?: (string | {
-        key: string[];
-    })[] | undefined;
-    optimistic?: {
-        target: string | {
-            resource: string;
-            params?: Record<string, unknown> | undefined;
-        };
-        merge: "append" | "prepend" | "replace" | "patch" | "remove";
-        idField?: string | undefined;
-    } | undefined;
-}>;
+    }, z.core.$strict>>;
+}, z.core.$strict>;
 type HttpMethod = z.infer<typeof httpMethodSchema>;
 type ResourceRef = z.infer<typeof resourceRefSchema>;
 type ResourceInvalidationTarget = z.infer<typeof resourceInvalidationTargetSchema>;

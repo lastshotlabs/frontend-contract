@@ -17,7 +17,7 @@ export const resourceParamSchema: z.ZodType<unknown | FromRef> = z.lazy(() =>
 export const resourceRefSchema = z
   .object({
     resource: z.string().min(1),
-    params: z.record(resourceParamSchema).optional(),
+    params: z.record(z.string(), resourceParamSchema).optional(),
   })
   .strict();
 
@@ -35,7 +35,7 @@ export const optimisticTargetSchema = z.union([
   z
     .object({
       resource: z.string().min(1),
-      params: z.record(z.unknown()).optional(),
+      params: z.record(z.string(), z.unknown()).optional(),
     })
     .strict(),
 ]);
@@ -75,7 +75,7 @@ export const resourceConfigSchema = z
     method: httpMethodSchema.optional(),
     endpoint: z.string().min(1),
     client: z.string().min(1).optional(),
-    params: z.record(z.unknown()).optional(),
+    params: z.record(z.string(), z.unknown()).optional(),
     cacheMs: z.number().int().min(0).optional(),
     pollMs: z.number().int().positive().optional(),
     refetchOnMount: z.boolean().optional(),

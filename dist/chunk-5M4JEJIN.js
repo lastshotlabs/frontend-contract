@@ -5,7 +5,7 @@ import {
 
 // src/components/schema.ts
 import { z } from "zod";
-var componentTokenOverridesSchema = z.record(z.string());
+var componentTokenOverridesSchema = z.record(z.string(), z.string());
 var componentZIndexSchema = z.union([
   z.enum([
     "base",
@@ -280,7 +280,7 @@ var SURFACE_STATE_NAMES = [
 var surfaceStateNameSchema = z.enum(SURFACE_STATE_NAMES);
 var slotStateNameSchema = surfaceStateNameSchema;
 var statefulElementSchema = styleableElementSchema.extend({
-  states: z.record(surfaceStateNameSchema, styleableElementSchema.partial()).optional()
+  states: z.partialRecord(surfaceStateNameSchema, styleableElementSchema.partial()).optional()
 });
 function slotsSchema(slotNames) {
   return z.object(
@@ -364,4 +364,4 @@ export {
   sharedBaseComponentSchema,
   extendSharedComponentSchema
 };
-//# sourceMappingURL=chunk-I3SMQ7EU.js.map
+//# sourceMappingURL=chunk-5M4JEJIN.js.map

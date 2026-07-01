@@ -1,6 +1,6 @@
 {
   "name": "@lastshotlabs/frontend-contract",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.cjs",
@@ -78,14 +78,15 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "dependencies": {
-    "zod": "^3.24.0"
+  "peerDependencies": {
+    "zod": ">=4.0 <5"
   },
   "devDependencies": {
     "@types/node": "^25.5.0",
     "prettier": "^3.8.1",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
-    "vitest": "^3.0.0"
+    "vitest": "^3.0.0",
+    "zod": ">=4.0"
   }
 }

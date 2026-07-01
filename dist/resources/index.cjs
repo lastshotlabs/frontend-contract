@@ -91,7 +91,7 @@ var resourceParamSchema = import_zod2.z.lazy(
 );
 var resourceRefSchema = import_zod2.z.object({
   resource: import_zod2.z.string().min(1),
-  params: import_zod2.z.record(resourceParamSchema).optional()
+  params: import_zod2.z.record(import_zod2.z.string(), resourceParamSchema).optional()
 }).strict();
 var resourceInvalidationTargetSchema = import_zod2.z.union([
   import_zod2.z.string().min(1),
@@ -103,7 +103,7 @@ var optimisticTargetSchema = import_zod2.z.union([
   import_zod2.z.string().min(1),
   import_zod2.z.object({
     resource: import_zod2.z.string().min(1),
-    params: import_zod2.z.record(import_zod2.z.unknown()).optional()
+    params: import_zod2.z.record(import_zod2.z.string(), import_zod2.z.unknown()).optional()
   }).strict()
 ]);
 var optimisticConfigSchema = import_zod2.z.object({
@@ -129,7 +129,7 @@ var resourceConfigSchema = import_zod2.z.object({
   method: httpMethodSchema.optional(),
   endpoint: import_zod2.z.string().min(1),
   client: import_zod2.z.string().min(1).optional(),
-  params: import_zod2.z.record(import_zod2.z.unknown()).optional(),
+  params: import_zod2.z.record(import_zod2.z.string(), import_zod2.z.unknown()).optional(),
   cacheMs: import_zod2.z.number().int().min(0).optional(),
   pollMs: import_zod2.z.number().int().positive().optional(),
   refetchOnMount: import_zod2.z.boolean().optional(),

@@ -11,7 +11,7 @@ const i18nInlineStringsSchema: z.ZodType<
   Record<string, string | Record<string, unknown>>
 > = z.lazy(
   () =>
-    z.record(z.union([z.string(), i18nInlineStringsSchema])) as z.ZodType<
+    z.record(z.string(), z.union([z.string(), i18nInlineStringsSchema])) as z.ZodType<
       Record<string, string | Record<string, unknown>>
     >,
 );
@@ -19,7 +19,7 @@ const i18nInlineStringsSchema: z.ZodType<
 export const tRefSchema = z
   .object({
     t: z.string().min(1),
-    vars: z.record(z.unknown()).optional(),
+    vars: z.record(z.string(), z.unknown()).optional(),
   })
   .strict();
 
@@ -27,7 +27,7 @@ export const i18nConfigSchema = z
   .object({
     default: z.string().min(1),
     locales: z.array(z.string().min(1)).min(1),
-    strings: z.record(z.union([z.string(), i18nInlineStringsSchema])),
+    strings: z.record(z.string(), z.union([z.string(), i18nInlineStringsSchema])),
     detect: z.array(i18nDetectStrategySchema).optional(),
   })
   .strict();

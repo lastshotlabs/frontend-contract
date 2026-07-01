@@ -16,7 +16,7 @@ import {
   resourceInvalidationTargetSchema,
   resourceParamSchema,
   resourceRefSchema
-} from "../chunk-4XCOAAV2.js";
+} from "../chunk-M63NNXLQ.js";
 import "../chunk-TQB3JHYG.js";
 import "../chunk-674UXIUU.js";
 export {

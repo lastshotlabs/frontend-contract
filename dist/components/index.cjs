@@ -102,7 +102,7 @@ var exprRefSchema = import_zod.z.object({
 }).strict();
 
 // src/components/schema.ts
-var componentTokenOverridesSchema = import_zod2.z.record(import_zod2.z.string());
+var componentTokenOverridesSchema = import_zod2.z.record(import_zod2.z.string(), import_zod2.z.string());
 var componentZIndexSchema = import_zod2.z.union([
   import_zod2.z.enum([
     "base",
@@ -377,7 +377,7 @@ var SURFACE_STATE_NAMES = [
 var surfaceStateNameSchema = import_zod2.z.enum(SURFACE_STATE_NAMES);
 var slotStateNameSchema = surfaceStateNameSchema;
 var statefulElementSchema = styleableElementSchema.extend({
-  states: import_zod2.z.record(surfaceStateNameSchema, styleableElementSchema.partial()).optional()
+  states: import_zod2.z.partialRecord(surfaceStateNameSchema, styleableElementSchema.partial()).optional()
 });
 function slotsSchema(slotNames) {
   return import_zod2.z.object(

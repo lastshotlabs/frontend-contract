@@ -1,3 +1,6 @@
 node_modules/
 .env
 .env.*
+
+# Generated declaration artifacts must never live in src (they shadow .ts during dts bundling)
+src/**/*.d.ts

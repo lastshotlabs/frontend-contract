@@ -8,7 +8,7 @@ import {
   spacingSchema,
   themeColorsSchema,
   themeConfigSchema
-} from "../chunk-GCI55URR.js";
+} from "../chunk-SKN3BEDN.js";
 export {
   componentTokensSchema,
   flavorOverrideSchema,

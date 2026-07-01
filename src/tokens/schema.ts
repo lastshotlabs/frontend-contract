@@ -219,7 +219,7 @@ export const flavorOverrideSchema = z
 export const themeConfigSchema = z
   .object({
     flavor: z.string().optional(),
-    flavors: z.record(flavorOverrideSchema).optional(),
+    flavors: z.record(z.string(), flavorOverrideSchema).optional(),
     overrides: z
       .object({
         colors: themeColorsSchema.optional(),

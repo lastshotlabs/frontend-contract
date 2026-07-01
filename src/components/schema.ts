@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { exprRefSchema, fromRefSchema } from "../refs";
 
-export const componentTokenOverridesSchema = z.record(z.string());
+export const componentTokenOverridesSchema = z.record(z.string(), z.string());
 
 export const componentZIndexSchema = z.union([
   z.enum([
@@ -334,7 +334,7 @@ export const slotStateNameSchema = surfaceStateNameSchema;
 
 export const statefulElementSchema = styleableElementSchema.extend({
   states: z
-    .record(surfaceStateNameSchema, styleableElementSchema.partial())
+    .partialRecord(surfaceStateNameSchema, styleableElementSchema.partial())
     .optional(),
 });
 

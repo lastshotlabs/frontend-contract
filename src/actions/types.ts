@@ -390,7 +390,7 @@ export const runWorkflowActionSchema = z
   .object({
     type: z.literal("run-workflow"),
     workflow: z.string().min(1),
-    input: z.record(z.unknown()).optional(),
+    input: z.record(z.string(), z.unknown()).optional(),
   })
   .extend(actionTimingFields)
   .strict();
@@ -425,7 +425,7 @@ export const wsSendActionSchema = z
   .object({
     type: z.literal("ws-send"),
     event: z.string().min(1),
-    data: z.union([z.record(z.unknown()), fromRefSchema]).optional(),
+    data: z.union([z.record(z.string(), z.unknown()), fromRefSchema]).optional(),
   })
   .extend(actionTimingFields)
   .strict();
@@ -436,8 +436,8 @@ function buildApiActionSchema(): z.ZodType<ApiAction> {
       type: z.literal("api"),
       method: z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"]),
       endpoint: endpointTargetSchema,
-      body: z.union([z.record(z.unknown()), fromRefSchema]).optional(),
-      params: z.record(z.unknown()).optional(),
+      body: z.union([z.record(z.string(), z.unknown()), fromRefSchema]).optional(),
+      params: z.record(z.string(), z.unknown()).optional(),
       invalidates: z.array(z.string().min(1)).optional(),
       onSuccess: z
         .union([z.lazy(() => actionSchema), z.array(z.lazy(() => actionSchema))])
@@ -479,7 +479,7 @@ export const trackActionSchema = z
   .object({
     type: z.literal("track"),
     event: z.string().min(1),
-    props: z.record(z.unknown()).optional(),
+    props: z.record(z.string(), z.unknown()).optional(),
   })
   .extend(actionTimingFields)
   .strict();
@@ -489,7 +489,7 @@ export const logActionSchema = z
     type: z.literal("log"),
     level: z.enum(["info", "warn", "error", "debug"]),
     message: z.string(),
-    data: z.record(z.unknown()).optional(),
+    data: z.record(z.string(), z.unknown()).optional(),
   })
   .extend(actionTimingFields)
   .strict();

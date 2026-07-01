@@ -19,7 +19,7 @@ var resourceParamSchema = z.lazy(
 );
 var resourceRefSchema = z.object({
   resource: z.string().min(1),
-  params: z.record(resourceParamSchema).optional()
+  params: z.record(z.string(), resourceParamSchema).optional()
 }).strict();
 var resourceInvalidationTargetSchema = z.union([
   z.string().min(1),
@@ -31,7 +31,7 @@ var optimisticTargetSchema = z.union([
   z.string().min(1),
   z.object({
     resource: z.string().min(1),
-    params: z.record(z.unknown()).optional()
+    params: z.record(z.string(), z.unknown()).optional()
   }).strict()
 ]);
 var optimisticConfigSchema = z.object({
@@ -57,7 +57,7 @@ var resourceConfigSchema = z.object({
   method: httpMethodSchema.optional(),
   endpoint: z.string().min(1),
   client: z.string().min(1).optional(),
-  params: z.record(z.unknown()).optional(),
+  params: z.record(z.string(), z.unknown()).optional(),
   cacheMs: z.number().int().min(0).optional(),
   pollMs: z.number().int().positive().optional(),
   refetchOnMount: z.boolean().optional(),
@@ -224,4 +224,4 @@ export {
   collectDependentResources,
   getResourceInvalidationTargets
 };
-//# sourceMappingURL=chunk-4XCOAAV2.js.map
+//# sourceMappingURL=chunk-M63NNXLQ.js.map

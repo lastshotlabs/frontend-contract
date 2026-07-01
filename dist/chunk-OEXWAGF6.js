@@ -1,6 +1,6 @@
 import {
   endpointTargetSchema
-} from "./chunk-4XCOAAV2.js";
+} from "./chunk-M63NNXLQ.js";
 
 // src/actions/types.ts
 import { z } from "zod";
@@ -125,7 +125,7 @@ var scrollToActionSchema = z.object({
 var runWorkflowActionSchema = z.object({
   type: z.literal("run-workflow"),
   workflow: z.string().min(1),
-  input: z.record(z.unknown()).optional()
+  input: z.record(z.string(), z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var branchActionSchema = z.lazy(
   () => z.object({
@@ -146,15 +146,15 @@ var forEachActionSchema = z.lazy(
 var wsSendActionSchema = z.object({
   type: z.literal("ws-send"),
   event: z.string().min(1),
-  data: z.union([z.record(z.unknown()), fromRefSchema]).optional()
+  data: z.union([z.record(z.string(), z.unknown()), fromRefSchema]).optional()
 }).extend(actionTimingFields).strict();
 function buildApiActionSchema() {
   return z.object({
     type: z.literal("api"),
     method: z.enum(["GET", "POST", "PUT", "PATCH", "DELETE"]),
     endpoint: endpointTargetSchema,
-    body: z.union([z.record(z.unknown()), fromRefSchema]).optional(),
-    params: z.record(z.unknown()).optional(),
+    body: z.union([z.record(z.string(), z.unknown()), fromRefSchema]).optional(),
+    params: z.record(z.string(), z.unknown()).optional(),
     invalidates: z.array(z.string().min(1)).optional(),
     onSuccess: z.union([z.lazy(() => actionSchema), z.array(z.lazy(() => actionSchema))]).optional(),
     onError: z.union([z.lazy(() => actionSchema), z.array(z.lazy(() => actionSchema))]).optional()
@@ -180,13 +180,13 @@ function buildToastActionSchema() {
 var trackActionSchema = z.object({
   type: z.literal("track"),
   event: z.string().min(1),
-  props: z.record(z.unknown()).optional()
+  props: z.record(z.string(), z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var logActionSchema = z.object({
   type: z.literal("log"),
   level: z.enum(["info", "warn", "error", "debug"]),
   message: z.string(),
-  data: z.record(z.unknown()).optional()
+  data: z.record(z.string(), z.unknown()).optional()
 }).extend(actionTimingFields).strict();
 var apiActionSchema = buildApiActionSchema();
 var toastActionSchema = buildToastActionSchema();
@@ -245,4 +245,4 @@ export {
   toastActionSchema,
   actionSchema
 };
-//# sourceMappingURL=chunk-XA6BHBV7.js.map
+//# sourceMappingURL=chunk-OEXWAGF6.js.map

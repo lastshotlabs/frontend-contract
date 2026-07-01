@@ -31,4 +31,4 @@ export const stateValueConfigSchema = z
     }
   });
 
-export const stateConfigMapSchema = z.record(stateValueConfigSchema);
+export const stateConfigMapSchema = z.record(z.string(), stateValueConfigSchema);

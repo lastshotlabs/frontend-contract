@@ -1,6 +1,6 @@
 import {
   endpointTargetSchema
-} from "./chunk-4XCOAAV2.js";
+} from "./chunk-M63NNXLQ.js";
 
 // src/state/schema.ts
 import { z } from "zod";
@@ -27,11 +27,11 @@ var stateValueConfigSchema = z.object({
     });
   }
 });
-var stateConfigMapSchema = z.record(stateValueConfigSchema);
+var stateConfigMapSchema = z.record(z.string(), stateValueConfigSchema);
 
 export {
   statePersistConfigSchema,
   stateValueConfigSchema,
   stateConfigMapSchema
 };
-//# sourceMappingURL=chunk-RMR6SKEX.js.map
+//# sourceMappingURL=chunk-4RKVNIBJ.js.map
