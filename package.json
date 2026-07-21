@@ -1,6 +1,6 @@
 {
   "name": "@lastshotlabs/frontend-contract",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Shared design tokens and frontend contract schemas for Last Shot Labs apps.",
   "license": "MIT",
   "repository": {
@@ -78,10 +78,13 @@
       "types": "./dist/components/index.d.ts",
       "import": "./dist/components/index.js",
       "require": "./dist/components/index.cjs"
-    }
+    },
+    "./fixtures/*": "./fixtures/*",
+    "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "fixtures"
   ],
   "scripts": {
     "build": "tsup",
