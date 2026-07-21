@@ -1,7 +1,19 @@
 {
   "name": "@lastshotlabs/frontend-contract",
-  "version": "0.2.0",
-  "private": true,
+  "version": "0.2.1",
+  "description": "Shared design tokens and frontend contract schemas for Last Shot Labs apps.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lastshotlabs/frontend-contract.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lastshotlabs/frontend-contract/issues"
+  },
+  "homepage": "https://github.com/lastshotlabs/frontend-contract#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
